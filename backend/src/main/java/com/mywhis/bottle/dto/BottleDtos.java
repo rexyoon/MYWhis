@@ -21,6 +21,7 @@ public class BottleDtos {
             BigDecimal abv,
             @NotNull LocalDate registeredDate,
             LocalDate openedDate,
+            String imageUrl,
             String notes
     ) {}
 
@@ -46,6 +47,7 @@ public class BottleDtos {
             boolean opened,
             Long elapsedDaysSinceRegistered,
             Long elapsedDaysSinceOpened,
+            String imageUrl,
             String notes,
             OffsetDateTime createdAt,
             OffsetDateTime updatedAt

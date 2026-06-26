@@ -2,6 +2,8 @@ package com.mywhis.common;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.mywhis.ai.AiException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -36,5 +38,9 @@ public class GlobalExceptionHandler {
         body.put("error", status.getReasonPhrase());
         body.put("message", message);
         return ResponseEntity.status(status).body(body);
+    }
+    @ExceptionHandler(AiException.class)
+    public ResponseEntity<Map<String, Object>> handleAi(AiException e){
+        return error(HttpStatus.SERVICE_UNAVAILABLE, e.getMessage()); //503
     }
 }

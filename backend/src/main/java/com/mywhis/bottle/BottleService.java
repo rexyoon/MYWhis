@@ -100,6 +100,7 @@ public class BottleService {
         b.setAbv(req.abv());
         b.setRegisteredDate(req.registeredDate());
         b.setOpenedDate(req.openedDate());
+        b.setImageUrl(req.imageUrl() != null && !req.imageUrl().isBlank() ? req.imageUrl().trim() : null);
         b.setNotes(req.notes() != null && !req.notes().isBlank() ? req.notes().trim() : null);
     }
 
@@ -133,6 +134,7 @@ public class BottleService {
                 b.getOpenedDate() != null,
                 sinceReg,
                 sinceOpen,
+                b.getImageUrl(),
                 b.getNotes(),
                 b.getCreatedAt(),
                 b.getUpdatedAt()

@@ -28,3 +28,7 @@ app:
   cors:
     # 개발 중 Expo 앱에서의 접근 허용 (운영에선 도메인 지정)
     allowed-origins: "*"
+  gemini:
+    api-key:
+    model:
+    base-url: https://generativelanguage.googleapis.com/v1beta
