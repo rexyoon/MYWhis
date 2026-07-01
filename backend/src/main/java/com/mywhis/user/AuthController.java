@@ -1,5 +1,6 @@
 package com.mywhis.user;
 
+import com.mywhis.user.dto.AuthDtos;
 import com.mywhis.user.dto.AuthDtos.AuthResponse;
 import com.mywhis.user.dto.AuthDtos.LoginRequest;
 import com.mywhis.user.dto.AuthDtos.SignupRequest;
@@ -27,5 +28,15 @@ public class AuthController {
     @PostMapping("/login")
     public AuthResponse login(@Valid @RequestBody LoginRequest request) {
         return authService.login(request);
+    }
+
+    @PostMapping("/kakao")
+    public AuthResponse kakao(@Valid @RequestBody AuthDtos.SocialLoginRequest request){
+        return authService.socialLogin("kakao", request.accessToken());
+    }
+
+    @PostMapping("/naver")
+    public AuthResponse naver(@Valid @RequestBody AuthDtos.SocialLoginRequest request){
+        return authService.socialLogin("naver", request.accessToken());
     }
 }

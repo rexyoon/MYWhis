@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "MyWhis",
+    "slug": "mywhis",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "mywhis",
+    "userInterfaceStyle": "dark",
+    "splash": { "backgroundColor": "#1a1410" },
+    "ios": { "supportsTablet": true, "bundleIdentifier": "com.mywhis.app" },
+    "android": {
+      "package": "com.mywhis.app",
+      "adaptiveIcon": { "backgroundColor": "#1a1410" }
+    },
+    "plugins": ["expo-router"],
+    "experiments": { "typedRoutes": true }
+  }
+}

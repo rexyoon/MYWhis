@@ -19,5 +19,8 @@ public class AuthDtos {
             String email,
             String nickname
     ){}
+    public record SocialLoginRequest(
+            @NotBlank  String accessToken
+    ){}
     private AuthDtos(){}
 }

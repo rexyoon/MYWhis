@@ -15,15 +15,18 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider tokenProvider;
+    private final OAuthClient oAuthClient;
 
     public AuthService(
             UserRepository userRepository,
             PasswordEncoder passwordEncoder,
-            JwtTokenProvider tokenProvider
+            JwtTokenProvider tokenProvider,
+            OAuthClient oAuthClient
     ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.tokenProvider = tokenProvider;
+        this.oAuthClient = oAuthClient;
     }
 
     @Transactional
@@ -49,6 +52,24 @@ public class AuthService {
         if (!passwordEncoder.matches(req.password(), user.getPasswordHash())) {
             throw new IllegalArgumentException("이메일 또는 비밀번호가 올바르지 않습니다.");
         }
+        String token = tokenProvider.createToken(user.getId(), user.getEmail());
+        return new AuthResponse(token, user.getEmail(), user.getNickname());
+    }
+
+    @Transactional
+    public AuthResponse socialLogin(String provider, String accessToken) {
+        SocialProfile p = oAuthClient.fetch(provider, accessToken);
+
+        User user = userRepository
+                .findByProviderAndProviderId(p.provider(), p.providerId())
+                .orElseGet(() -> userRepository.save(User.builder()
+                        .provider(p.provider())
+                        .providerId(p.providerId())
+                        .email(p.email())
+                        .nickname(p.nickname())
+                        .createdAt(OffsetDateTime.now())
+                        .build()));
+
         String token = tokenProvider.createToken(user.getId(), user.getEmail());
         return new AuthResponse(token, user.getEmail(), user.getNickname());
     }

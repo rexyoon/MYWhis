@@ -38,4 +38,10 @@ public class User {
 
     @Column(name = "created_at")
     private OffsetDateTime createdAt;
+
+    @Column(nullable = false)
+    private String provider;
+
+    @Column(name = "provider_id")
+    private String providerId;
 }
