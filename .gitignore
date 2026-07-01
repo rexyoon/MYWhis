@@ -1,6 +1,38 @@
+# 의존성 / 빌드 산출물
 node_modules/
-.env
-.expo/
 dist/
+build/
+target/
+
+# 환경변수 (예: mobile/.env, backend/.env) — .example 만 커밋
+.env
+.env.local
+.env.*.local
+
+# Expo / RN
+.expo/
+web-build/
+*.orig.*
+expo-env.d.ts
+
+# 로그
 *.log
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# IDE / 에디터
+.idea/
+*.iml
+.vscode/
+*.swp
+
+# OS
 .DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# 아카이브 / 디자인 핸드오프 export (코드 저장소엔 불필요)
+*.zip
+*-handoff/
